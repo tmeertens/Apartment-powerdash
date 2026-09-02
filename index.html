@@ -1,0 +1,1073 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
+<title>Apartment Scorecard</title>
+
+<!-- iOS "Add to Home Screen" / standalone web app behavior -->
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="Scorecard" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="theme-color" content="#0B1220" />
+<link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAIAAACyr5FlAAAD20lEQVR4nO3cvY3VQBSG4QsiWSERkCMhCqAKigARUgC1UAAhgiKoggJI6IBkU4KVrlaCb2XPnLHH+HlyG6/Pu8dm/x49ff7yAv/yeO8LYF7iIBIHkTiIxEEkDiJxEImDSBxE4iASB5E4iMRB9GTvC7jc3Dzb+xLmdXv7e8d/fZ84BLHQ/Ru1fSibxqGJHte7t1klW8ShiVqbVTL8hVQZ44y+twM3hyw2cHeTB62QUZtDGVsadLfrN4csdjFihRRvDmXsq/b+V8ahjBkUTqEsDmXMo2oWNXEoYzYlEymIQxlz6p9LbxzKmFnndHzLnqgrDmtjfj0zao9DGUfRPCmPFaLGOKyNY2mbV0scyjiihql5rBCJg2h1HJ4px7V2djYHkTiI1sXhmXJ0qyZocxCJg0gcRCvi8MLxf1g+R5uDSBxE4iASB9H+f9nnP/bz84u1h7z68GvElbSxOUZpKKP5qEHEMUTPjOfpQxz1+qc7SR/iKFY11xn6EAeROIjEQSQOInEQiYNIHETiIBIHkTiIxEEkDiJxEImDSBxE4iASB5E4iMRBdOrfW/ny9dvaQ96/ezviSuZ03s3RUEbzUQd10jh6ZnyePs4YR/90T9LH6eKomusZ+jhdHCwnDiJxEImDSBxE4iASB5E4iMRBJA4icRCJg0gcROIgEgfR1D9D+v3j67WHvPn0Y8SVnNO8m6OhjOaj+KdJ4+iZsT6qzBhH/3T1UWK6OKrmqo9+08XBPMRBJA4icRCJg0gcROIgEgeROIjEQSQOInEQiYNIHETiIBIHkTiIxEEkDiJxEImDSBxE4iASB5E4iMRBJA4icRCJg0gcROIgEgeROIjEQSQOInEQiYNIHETTxVH196nTed6/e1ty/nSeVx9+lZy/6jw9povjUtHHw2fo7+PhM/TPdYYyLnPGcenrY8mxPX0sObZnupOUcVkVx+3t73HX8be2PpYf1dbH8qPaZrxBGcvn+Ojp85fLz3tz86zlcpjJ8jgmfawwA3EQrYtj49cOyq2aoM1BJA6i1XF4shzX2tnZHETiIGqJw5PliBqm1rg59HEsbfPyWCFqj8PyOIrmSXVtDn3Mr2dGHitEvXFYHjPrnE7B5tDHnPrnUvNY0cdsSiZS9s6hj3lUzaLyhVQfMyicQvH/VvSxr9r7/6TwXHfurs+PIm9sxKflqK9zWCFbGnS36zfHlRWygaGfhMO/QmqFjDP63g7cHFfXj8EWKbHZ59sWcVyppMf2O3jTOK7uf5xCecC+D+V94rjPS8m0fMueSBxE4iASB5E4iMRBJA4icRCJg0gcROIgEgfRH1tm4t/uzvHsAAAAAElFTkSuQmCC" />
+<link rel="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAIAAACyr5FlAAAD20lEQVR4nO3cvY3VQBSG4QsiWSERkCMhCqAKigARUgC1UAAhgiKoggJI6IBkU4KVrlaCb2XPnLHH+HlyG6/Pu8dm/x49ff7yAv/yeO8LYF7iIBIHkTiIxEEkDiJxEImDSBxE4iASB5E4iMRB9GTvC7jc3Dzb+xLmdXv7e8d/fZ84BLHQ/Ru1fSibxqGJHte7t1klW8ShiVqbVTL8hVQZ44y+twM3hyw2cHeTB62QUZtDGVsadLfrN4csdjFihRRvDmXsq/b+V8ahjBkUTqEsDmXMo2oWNXEoYzYlEymIQxlz6p9LbxzKmFnndHzLnqgrDmtjfj0zao9DGUfRPCmPFaLGOKyNY2mbV0scyjiihql5rBCJg2h1HJ4px7V2djYHkTiI1sXhmXJ0qyZocxCJg0gcRCvi8MLxf1g+R5uDSBxE4iASB9H+f9nnP/bz84u1h7z68GvElbSxOUZpKKP5qEHEMUTPjOfpQxz1+qc7SR/iKFY11xn6EAeROIjEQSQOInEQiYNIHETiIBIHkTiIxEEkDiJxEImDSBxE4iASB5E4iMRBdOrfW/ny9dvaQ96/ezviSuZ03s3RUEbzUQd10jh6ZnyePs4YR/90T9LH6eKomusZ+jhdHCwnDiJxEImDSBxE4iASB5E4iMRBJA4icRCJg0gcROIgEgfR1D9D+v3j67WHvPn0Y8SVnNO8m6OhjOaj+KdJ4+iZsT6qzBhH/3T1UWK6OKrmqo9+08XBPMRBJA4icRCJg0gcROIgEgeROIjEQSQOInEQiYNIHETiIBIHkTiIxEEkDiJxEImDSBxE4iASB5E4iMRBJA4icRCJg0gcROIgEgeROIjEQSQOInEQiYNIHETTxVH196nTed6/e1ty/nSeVx9+lZy/6jw9povjUtHHw2fo7+PhM/TPdYYyLnPGcenrY8mxPX0sObZnupOUcVkVx+3t73HX8be2PpYf1dbH8qPaZrxBGcvn+Ojp85fLz3tz86zlcpjJ8jgmfawwA3EQrYtj49cOyq2aoM1BJA6i1XF4shzX2tnZHETiIGqJw5PliBqm1rg59HEsbfPyWCFqj8PyOIrmSXVtDn3Mr2dGHitEvXFYHjPrnE7B5tDHnPrnUvNY0cdsSiZS9s6hj3lUzaLyhVQfMyicQvH/VvSxr9r7/6TwXHfurs+PIm9sxKflqK9zWCFbGnS36zfHlRWygaGfhMO/QmqFjDP63g7cHFfXj8EWKbHZ59sWcVyppMf2O3jTOK7uf5xCecC+D+V94rjPS8m0fMueSBxE4iASB5E4iMRBJA4icRCJg0gcROIgEgfRH1tm4t/uzvHsAAAAAElFTkSuQmCC" />
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap');
+
+  :root {
+    --bg: #0B1220;
+    --surface: #141B2E;
+    --surface-raised: #1B2540;
+    --input: #1D2740;
+    --border: #28324D;
+    --border-strong: #37436A;
+    --text: #F3F6FB;
+    --text-dim: #93A0BD;
+    --text-faint: #5B6789;
+    --gold: #F2B84B;
+    --gold-dim: #3A2E14;
+    --green: #3ECF8E;
+    --rose: #FB7185;
+    --rose-dim: #3E2430;
+    --silver: #B9C2D6;
+    --bronze: #D08A5C;
+    --font-display: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  html, body { margin: 0; padding: 0; background: var(--bg); height: 100%; overscroll-behavior-y: none; }
+  body { font-family: var(--font-body); color: var(--text); }
+  input, textarea, select, button { font-family: inherit; }
+  input::placeholder, textarea::placeholder { color: var(--text-faint); }
+  input:focus, textarea:focus { outline: none; }
+  button { cursor: pointer; -webkit-appearance: none; appearance: none; }
+  a { color: inherit; }
+
+  #app-root {
+    max-width: 480px;
+    margin: 0 auto;
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    background: var(--bg);
+  }
+
+  #app-content {
+    flex: 1;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-top: env(safe-area-inset-top);
+  }
+
+  .active-press:active { transform: scale(0.96); }
+  .active-press-99:active { transform: scale(0.99); }
+  button.active-press, button.active-press-99 { transition: transform 0.1s ease; }
+
+  .section-label {
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    color: var(--text-faint);
+    margin: 22px 4px 8px;
+  }
+
+  .group-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+
+  .field-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--border);
+  }
+  .field-row:last-child { border-bottom: none; }
+  .field-row .label { font-size: 15px; color: var(--text); flex-shrink: 0; }
+  .field-row .value-wrap { display: flex; align-items: center; gap: 6px; flex: 1; justify-content: flex-end; min-width: 0; }
+  .field-row .suffix { font-size: 13px; color: var(--text-faint); flex-shrink: 0; }
+
+  .text-input {
+    font-size: 15px;
+    color: var(--text);
+    background: transparent;
+    border: none;
+    text-align: right;
+    width: 110px;
+    padding: 6px 2px;
+    min-width: 0;
+  }
+  .text-input.grow { width: 100%; }
+  .text-input.left { text-align: left; }
+
+  .primary-btn {
+    font-size: 15px;
+    font-weight: 600;
+    color: #0B1220;
+    background: var(--gold);
+    border: none;
+    border-radius: 12px;
+    padding: 13px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    width: 100%;
+  }
+  .primary-btn:disabled { background: var(--text-faint); }
+  .secondary-btn {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 10px;
+    border-radius: 10px;
+    background: var(--input);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-size: 13.5px;
+    font-weight: 600;
+  }
+  .secondary-btn.danger-armed { background: var(--rose-dim); border-color: var(--rose); color: var(--rose); }
+
+  .select-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 14px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    text-align: left;
+    width: 100%;
+    margin-bottom: 8px;
+  }
+  .select-card:last-child { margin-bottom: 0; }
+  .select-card.active { border-color: var(--gold); background: var(--gold-dim); }
+  .select-card .radio {
+    width: 19px; height: 19px; border-radius: 999px; border: 2px solid var(--border-strong);
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0; background: transparent;
+  }
+  .select-card.active .radio { border-color: var(--gold); background: var(--gold); }
+  .select-card .body { flex: 1; min-width: 0; }
+  .select-card .opt-label { font-size: 14.5px; font-weight: 600; color: var(--text); }
+  .select-card .opt-desc { font-size: 12.5px; color: var(--text-faint); margin-top: 1px; }
+  .select-card .badge { font-family: var(--font-display); font-size: 13px; font-weight: 700; flex-shrink: 0; text-align: right; }
+  .select-card .badge .per-mo { font-size: 9.5px; font-weight: 500; color: var(--text-faint); }
+
+  .chip-icon { width: 12px; height: 12px; flex-shrink: 0; }
+
+  /* Tab bar */
+  #tab-bar {
+    display: flex;
+    background: rgba(20,27,46,0.94);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-top: 1px solid var(--border);
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  .tab-btn {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    padding: 9px 0 8px;
+    background: none;
+    border: none;
+    color: var(--text-faint);
+  }
+  .tab-btn.active { color: var(--gold); }
+  .tab-btn .tab-label { font-size: 10.5px; font-weight: 600; }
+
+  /* Rankings hero */
+  .hero-card {
+    background: linear-gradient(160deg, var(--surface-raised), var(--surface));
+    border: 1px solid #7A5E28;
+    border-radius: 20px;
+    padding: 18px 18px 16px;
+    margin-bottom: 14px;
+  }
+  .hero-eyebrow { display: flex; align-items: center; gap: 6px; margin-bottom: 10px; font-size: 12.5px; font-weight: 600; color: var(--gold); }
+  .hero-name { font-size: 15px; font-weight: 600; color: var(--text); }
+  .hero-price { font-family: var(--font-display); font-size: 40px; font-weight: 700; color: var(--text); line-height: 1.15; margin-top: 2px; }
+  .hero-price .unit { font-family: var(--font-body); font-size: 15px; font-weight: 500; color: var(--text-faint); }
+  .hero-delta { font-size: 13px; display: flex; align-items: center; gap: 3px; margin-top: 4px; }
+
+  .stat-strip { display: flex; gap: 8px; margin-bottom: 18px; }
+  .stat-tile { flex: 1; padding: 11px 4px; text-align: center; }
+  .stat-tile .stat-value { font-family: var(--font-display); font-size: 16px; font-weight: 700; color: var(--text); }
+  .stat-tile .stat-label { font-size: 11px; color: var(--text-faint); margin-top: 1px; }
+
+  /* Ranking rows */
+  .rank-row { border-bottom: 1px solid var(--border); }
+  .rank-row:last-child { border-bottom: none; }
+  .rank-row-header {
+    width: 100%; display: flex; align-items: center; gap: 12px; padding: 14px;
+    background: transparent; border: none; text-align: left;
+  }
+  .rank-badge {
+    width: 30px; height: 30px; border-radius: 9px; display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-display); font-weight: 700; font-size: 14px; flex-shrink: 0; background: var(--input); color: var(--text-dim);
+  }
+  .rank-badge.r1 { background: var(--gold); color: #3A2A05; }
+  .rank-badge.r2 { background: var(--silver); color: #2A2E38; }
+  .rank-badge.r3 { background: var(--bronze); color: #3A2412; }
+  .rank-row-info { flex: 1; min-width: 0; }
+  .rank-row-name { font-size: 15px; font-weight: 600; color: var(--text); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .rank-row-addr { font-size: 12.5px; color: var(--text-faint); margin-top: 1px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .rank-row-price { text-align: right; flex-shrink: 0; }
+  .rank-row-price .price { font-family: var(--font-display); font-size: 17px; font-weight: 700; color: var(--text); }
+  .rank-row-price .delta { font-size: 11.5px; display: flex; align-items: center; justify-content: flex-end; gap: 2px; }
+  .chevron { flex-shrink: 0; transition: transform 0.2s ease; color: var(--text-faint); }
+  .chevron.open { transform: rotate(180deg); }
+
+  .breakdown-wrap { padding: 0 14px 16px; }
+  .breakdown-box { background: var(--input); border-radius: 12px; padding: 10px 14px; border: 1px solid var(--border); }
+  .breakdown-line { display: flex; justify-content: space-between; padding: 6px 0; font-size: 13.5px; }
+  .breakdown-line .blabel { color: var(--text-dim); }
+  .breakdown-line .bvalue { font-family: var(--font-display); font-weight: 600; }
+  .breakdown-total { display: flex; justify-content: space-between; padding-top: 9px; margin-top: 3px; border-top: 1px solid var(--border); }
+  .breakdown-total .tlabel { font-size: 13.5px; font-weight: 700; color: var(--text); }
+  .breakdown-total .tvalue { font-family: var(--font-display); font-size: 14.5px; font-weight: 700; color: var(--gold); }
+  .row-actions { display: flex; gap: 8px; margin-top: 10px; }
+
+  .empty-state { padding: 60px 24px; text-align: center; }
+  .empty-icon { width: 56px; height: 56px; border-radius: 16px; background: var(--surface); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; margin: 0 auto 18px; }
+  .empty-title { font-family: var(--font-display); font-size: 18px; font-weight: 600; color: var(--text); margin-bottom: 6px; }
+  .empty-sub { font-size: 14px; color: var(--text-dim); margin-bottom: 24px; line-height: 1.5; }
+
+  /* Form header */
+  .form-header {
+    position: sticky; top: 0; z-index: 10; display: flex; align-items: center; justify-content: space-between;
+    padding: 14px; background: rgba(11,18,32,0.92); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+  }
+  .form-header button { background: none; border: none; padding: 6px; }
+  .form-title { font-size: 15px; font-weight: 600; color: var(--text); }
+  .form-save-btn { font-size: 15px; font-weight: 700; color: var(--gold); }
+  .form-save-btn:disabled { color: var(--text-faint); }
+  .form-body { padding: 0 16px 40px; }
+  .form-caption { font-size: 11px; color: var(--text-faint); margin: 6px 4px 0; line-height: 1.4; }
+
+  .page-title { font-size: 22px; font-weight: 700; color: var(--text); margin-bottom: 2px; font-family: var(--font-display); }
+  .page-sub { font-size: 13.5px; color: var(--text-faint); margin-bottom: 6px; }
+
+  .settings-number {
+    font-size: 14px; color: var(--text); background: var(--input); border: 1px solid var(--border);
+    border-radius: 8px; padding: 6px 8px; width: 74px; text-align: right;
+  }
+  .settings-date {
+    font-size: 14px; color: var(--text); background: var(--input); border: 1px solid var(--border);
+    border-radius: 8px; padding: 6px 8px;
+  }
+  input[type="date"] { color-scheme: dark; }
+
+  .reset-btn {
+    width: 100%; padding: 13px; border-radius: 12px; background: transparent; border: 1px solid var(--border);
+    color: var(--text-dim); font-size: 14px; font-weight: 600;
+  }
+  .reset-btn.armed { background: var(--rose-dim); border-color: var(--rose); color: var(--rose); }
+
+  .io-row { display: flex; gap: 8px; margin-top: 10px; }
+  .io-btn {
+    flex: 1; display: flex; align-items: center; justify-content: center; gap: 6px; padding: 12px;
+    border-radius: 12px; background: var(--surface); border: 1px solid var(--border); color: var(--text);
+    font-size: 13.5px; font-weight: 600;
+  }
+  #import-file-input { display: none; }
+  #io-status { font-size: 11.5px; color: var(--text-faint); margin-top: 8px; text-align: center; min-height: 14px; }
+</style>
+</head>
+<body>
+  <div id="app-root">
+    <div id="app-content"></div>
+    <div id="tab-bar-wrap"></div>
+  </div>
+  <input type="file" id="import-file-input" accept="application/json" />
+<script>
+/* ============================================================
+   Apartment Scorecard -- standalone, offline-capable, localStorage-backed
+   ============================================================ */
+
+/* ---------------- Icons (inline SVG strings) ---------------- */
+const ICONS = {
+  chevronDown: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>',
+  check: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>',
+  trash: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"></path><path d="M10 11v6M14 11v6M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"></path></svg>',
+  pencil: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"></path><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"></path></svg>',
+  arrowUp: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>',
+  arrowDown: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg>',
+  plus: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>',
+  trophy: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0V4Z"></path><path d="M7 5H4a1 1 0 0 0-1 1 5 5 0 0 0 4 4.9M17 5h3a1 1 0 0 1 1 1 5 5 0 0 1-4 4.9"></path></svg>',
+  sliders: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="21" x2="4" y2="14"></line><line x1="4" y1="10" x2="4" y2="3"></line><line x1="12" y1="21" x2="12" y2="12"></line><line x1="12" y1="8" x2="12" y2="3"></line><line x1="20" y1="21" x2="20" y2="16"></line><line x1="20" y1="12" x2="20" y2="3"></line><line x1="1" y1="14" x2="7" y2="14"></line><line x1="9" y1="8" x2="15" y2="8"></line><line x1="17" y1="16" x2="23" y2="16"></line></svg>',
+  building: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="1"></rect><line x1="9" y1="6" x2="9" y2="6.01"></line><line x1="15" y1="6" x2="15" y2="6.01"></line><line x1="9" y1="10" x2="9" y2="10.01"></line><line x1="15" y1="10" x2="15" y2="10.01"></line><line x1="9" y1="14" x2="9" y2="14.01"></line><line x1="15" y1="14" x2="15" y2="14.01"></line><line x1="9" y1="18" x2="15" y2="18"></line></svg>',
+  x: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>',
+  download: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>',
+  upload: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>',
+};
+function icon(name, size, extra) {
+  return `<span style="display:inline-flex;width:${size}px;height:${size}px;flex-shrink:0;${extra||""}">${ICONS[name]}</span>`;
+}
+
+/* ---------------- Scoring constants ---------------- */
+const AMENITY_TIERS = [
+  { label: "Tier 1", desc: "Assigned parking, HVAC, dishwasher, in-unit W/D, balcony, basic community pool" },
+  { label: "Tier 2", desc: "Adds a gym, hot tub, decent community spaces" },
+  { label: "Tier 3", desc: "Luxury spa amenities, a good gym, good shared spaces" },
+  { label: "Tier 4", desc: "Ultra-luxury common spaces" },
+];
+
+const PRIVACY_OPTIONS = [
+  { label: "Low", desc: "Thin walls, noisy neighbors or street noise" },
+  { label: "Medium / Unknown", desc: "Average, or not confirmed yet" },
+  { label: "High", desc: "Well insulated, quiet building or unit" },
+];
+
+const LEASE_OPTIONS = [
+  { label: "Excellent", desc: "1–2 mo buyout, waived after 6–12 mo" },
+  { label: "Good", desc: "2–3 mo buyout or a reasonable fee" },
+  { label: "Fair", desc: "Owe balance minus re-lease credit" },
+  { label: "Poor", desc: "Owe the full remaining lease" },
+  { label: "None / Unknown", desc: "No break clause, or not confirmed yet" },
+];
+
+const WOW_OPTIONS = [
+  { label: "Tier 3 — Showstopper", desc: "Stops you at the door: view, finishes, layout" },
+  { label: "Tier 2 — Impressive", desc: "Clearly upgraded, memorable" },
+  { label: "Tier 1 — Solid", desc: "Meets expectations, nothing more" },
+  { label: "Underwhelming", desc: "Dated, cramped, or poor light/layout" },
+];
+
+const DEFAULT_SETTINGS = {
+  amenityDollars: [100, 0, -50, -100],
+  privacyDollars: [100, 0, -100],
+  wowDollars: [0, 30, 60, 90],
+  breakProbability: 0.05,
+  leaseSeverityPct: [0.12, 0.2, 0.32, 0.5, 0.6],
+  lateThreshold: "2026-10-01",
+  lateRate: 1000,
+  lateProrationDays: 30,
+  sqftLowThreshold: 750,
+  sqftHighThreshold: 850,
+  sqftLowFactor: 1.1,
+  sqftMidFactor: 1.0,
+  sqftHighFactor: 0.92,
+};
+
+function computeLeaseAdj(ratingLabel, effRentTotal, settings) {
+  const idx = LEASE_OPTIONS.findIndex((o) => o.label === ratingLabel);
+  if (idx < 0) return 0;
+  const severity = Number(settings.leaseSeverityPct[idx]) || 0;
+  return Math.round(settings.breakProbability * severity * effRentTotal);
+}
+
+function sqftFactorFor(sqft, settings) {
+  if (!sqft) return 1;
+  if (sqft < settings.sqftLowThreshold) return Number(settings.sqftLowFactor) || 1;
+  if (sqft <= settings.sqftHighThreshold) return Number(settings.sqftMidFactor) || 1;
+  return Number(settings.sqftHighFactor) || 1;
+}
+
+const money = (n) => {
+  const v = Math.round(n || 0);
+  const sign = v < 0 ? "-" : "";
+  return `${sign}$${Math.abs(v).toLocaleString()}`;
+};
+const money0 = (n) => `$${Math.round(n || 0).toLocaleString()}`;
+
+function parseLocalDate(str) {
+  if (!str) return null;
+  const [y, m, d] = str.split("-").map(Number);
+  return new Date(y, (m || 1) - 1, d || 1);
+}
+function daysBetween(a, b) {
+  const MS = 24 * 60 * 60 * 1000;
+  return Math.round((a.getTime() - b.getTime()) / MS);
+}
+
+function scoreApartment(apt, settings) {
+  const baseRent = Number(apt.baseRent) || 0;
+  const leaseTerm = Number(apt.leaseTerm) || 12;
+  const weeksFree = Number(apt.weeksFree) || 0;
+  const monthlyFee = Number(apt.monthlyFee) || 0;
+
+  const weeklyRent = baseRent / 4.345;
+  const effBaseRent = Math.round((baseRent * leaseTerm - weeksFree * weeklyRent) / leaseTerm);
+  const effRent = effBaseRent + monthlyFee;
+
+  const deposit = Number(apt.deposit) || 0;
+  const adminFee = Number(apt.adminFee) || 0;
+  const otherFee = Number(apt.otherFee) || 0;
+  const totalFees = deposit + adminFee + otherFee;
+  const amortizedFees = Math.round(totalFees / leaseTerm);
+
+  let lateTotal = 0;
+  if (apt.leaseStart) {
+    const start = parseLocalDate(apt.leaseStart);
+    const threshold = parseLocalDate(settings.lateThreshold);
+    if (start && threshold) {
+      const daysLate = Math.max(0, daysBetween(start, threshold));
+      lateTotal = Math.round(daysLate * (settings.lateRate / settings.lateProrationDays));
+    }
+  }
+  const lateAmortized = Math.round(lateTotal / leaseTerm);
+
+  const amenIdx = AMENITY_TIERS.findIndex((t) => t.label === apt.amenityTier);
+  const amenitiesAdj = amenIdx >= 0 ? Number(settings.amenityDollars[amenIdx]) || 0 : 0;
+
+  const privIdx = PRIVACY_OPTIONS.findIndex((t) => t.label === apt.privacyTier);
+  const privacyAdj = privIdx >= 0 ? Number(settings.privacyDollars[privIdx]) || 0 : 0;
+
+  const leaseAdj = computeLeaseAdj(apt.leaseRating, effRent, settings);
+
+  const wowIdx = WOW_OPTIONS.findIndex((o) => o.label === apt.wowTier);
+  const wowAdj = wowIdx >= 0 ? Number(settings.wowDollars[wowIdx]) || 0 : 0;
+
+  const subtotal = effRent + amortizedFees + lateAmortized + amenitiesAdj + privacyAdj + leaseAdj + wowAdj;
+
+  const sqft = Number(apt.sqft) || 0;
+  const sqftFactor = sqftFactorFor(sqft, settings);
+  const adjustedPrice = Math.round(subtotal * sqftFactor);
+
+  return {
+    effBaseRent, monthlyFee, effRent, totalFees, amortizedFees, lateTotal, lateAmortized,
+    amenitiesAdj, privacyAdj, leaseAdj, wowAdj, sqftFactor, subtotal, adjustedPrice,
+  };
+}
+
+/* ---------------- State + localStorage persistence ---------------- */
+const STORAGE_KEY_APTS = "apartmentScorecard.apartments";
+const STORAGE_KEY_SETTINGS = "apartmentScorecard.settings";
+
+let apartments = [];
+let settings = { ...DEFAULT_SETTINGS };
+let tab = "rankings";
+let editingApt = null;
+let expandedId = null;
+let pendingDeleteId = null;
+let pendingReset = false;
+let ioStatusMsg = "";
+
+function loadState() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY_APTS);
+    apartments = raw ? JSON.parse(raw) : [];
+  } catch (e) {
+    apartments = [];
+  }
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY_SETTINGS);
+    settings = raw ? { ...DEFAULT_SETTINGS, ...JSON.parse(raw) } : { ...DEFAULT_SETTINGS };
+  } catch (e) {
+    settings = { ...DEFAULT_SETTINGS };
+  }
+}
+function saveApartments() {
+  try {
+    localStorage.setItem(STORAGE_KEY_APTS, JSON.stringify(apartments));
+  } catch (e) {
+    console.error("Failed to save apartments", e);
+  }
+}
+function saveSettings() {
+  try {
+    localStorage.setItem(STORAGE_KEY_SETTINGS, JSON.stringify(settings));
+  } catch (e) {
+    console.error("Failed to save settings", e);
+  }
+}
+
+function emptyApartment() {
+  return {
+    id: `apt_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`,
+    name: "", address: "", baseRent: "", monthlyFee: "", leaseTerm: "12", leaseStart: "",
+    weeksFree: "0", deposit: "", adminFee: "", otherFee: "", sqft: "",
+    amenityTier: null, privacyTier: null, leaseRating: null, wowTier: null, notes: "",
+  };
+}
+
+function escapeHtml(str) {
+  if (str == null) return "";
+  return String(str).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+}
+function escapeAttr(v) {
+  return String(v == null ? "" : v).replace(/&/g, "&amp;").replace(/"/g, "&quot;");
+}
+
+/* ---------------- Live value helpers for the form ---------------- */
+function leaseValueFor(opt) {
+  const baseRent = Number(editingApt.baseRent) || 0;
+  const leaseTerm = Number(editingApt.leaseTerm) || 12;
+  const weeksFree = Number(editingApt.weeksFree) || 0;
+  const monthlyFee = Number(editingApt.monthlyFee) || 0;
+  const weeklyRent = baseRent / 4.345;
+  const effBaseRent = Math.round((baseRent * leaseTerm - weeksFree * weeklyRent) / leaseTerm);
+  const effRent = effBaseRent + monthlyFee;
+  return computeLeaseAdj(opt.label, effRent, settings);
+}
+function amenityValueFor(opt) {
+  const idx = AMENITY_TIERS.findIndex((t) => t.label === opt.label);
+  return Number(settings.amenityDollars[idx]) || 0;
+}
+function privacyValueFor(opt) {
+  const idx = PRIVACY_OPTIONS.findIndex((t) => t.label === opt.label);
+  return Number(settings.privacyDollars[idx]) || 0;
+}
+function wowValueFor(opt) {
+  const idx = WOW_OPTIONS.findIndex((o) => o.label === opt.label);
+  return Number(settings.wowDollars[idx]) || 0;
+}
+
+/* ---------------- Render: shared bits ---------------- */
+function breakdownLine(label, value, neutral) {
+  const color = neutral ? "var(--text)" : value === 0 ? "var(--text-faint)" : value > 0 ? "var(--rose)" : "var(--green)";
+  const prefix = !neutral && value > 0 ? "+" : "";
+  return `<div class="breakdown-line"><span class="blabel">${label}</span><span class="bvalue" style="color:${color}">${prefix}${money(value)}</span></div>`;
+}
+
+function renderTabBar() {
+  if (tab === "form") return "";
+  const tabs = [
+    { key: "rankings", label: "Rankings", ic: "trophy" },
+    { key: "form", label: "Add", ic: "plus" },
+    { key: "settings", label: "Tune", ic: "sliders" },
+  ];
+  return `<div id="tab-bar">${tabs
+    .map(
+      (t) => `
+    <button class="tab-btn active-press ${tab === t.key ? "active" : ""}" data-action="tab" data-tab="${t.key}">
+      ${icon(t.ic, 20)}
+      <span class="tab-label">${t.label}</span>
+    </button>`
+    )
+    .join("")}</div>`;
+}
+
+/* ---------------- Render: Rankings ---------------- */
+function renderRankings() {
+  if (apartments.length === 0) {
+    return `
+      <div class="empty-state">
+        <div class="empty-icon">${icon("building", 24)}</div>
+        <div class="empty-title">No properties logged yet</div>
+        <div class="empty-sub">Log your first tour to see it ranked here.</div>
+        <button class="primary-btn active-press" data-action="add">${icon("plus", 17)} Add a property</button>
+      </div>`;
+  }
+
+  const ranked = apartments
+    .map((apt) => ({ apt, score: scoreApartment(apt, settings) }))
+    .sort((a, b) => a.score.adjustedPrice - b.score.adjustedPrice);
+
+  const best = ranked[0].score.adjustedPrice;
+  const worst = ranked[ranked.length - 1].score.adjustedPrice;
+  const spread = worst - best;
+  const leader = ranked[0];
+  const leaderDelta = leader.score.adjustedPrice - (Number(leader.apt.baseRent) || 0);
+  const heroColor = leaderDelta < 0 ? "var(--green)" : leaderDelta > 0 ? "var(--rose)" : "var(--text-faint)";
+  const heroIcon = leaderDelta !== 0 ? icon(leaderDelta < 0 ? "arrowDown" : "arrowUp", 12) : "";
+  const heroText =
+    leaderDelta === 0
+      ? "matches listed rent"
+      : `${money0(Math.abs(leaderDelta))} ${leaderDelta < 0 ? "under" : "over"} listed rent of ${money0(leader.apt.baseRent)}`;
+
+  const statStrip =
+    apartments.length > 1
+      ? `<div class="stat-strip">
+          <div class="group-card stat-tile"><div class="stat-value">${apartments.length}</div><div class="stat-label">compared</div></div>
+          <div class="group-card stat-tile"><div class="stat-value" style="color:var(--green)">${money0(best)}</div><div class="stat-label">best price</div></div>
+          <div class="group-card stat-tile"><div class="stat-value">${money0(spread)}</div><div class="stat-label">spread</div></div>
+        </div>`
+      : "";
+
+  return `
+    <div style="padding:18px 16px 12px;">
+      <div class="page-title">Rankings</div>
+      <div class="page-sub">${apartments.length} propert${apartments.length === 1 ? "y" : "ies"} compared</div>
+      <div class="hero-card">
+        <div class="hero-eyebrow">${icon("trophy", 15)} Current best deal</div>
+        <div class="hero-name">${escapeHtml(leader.apt.name) || "Untitled property"}</div>
+        <div class="hero-price">${money0(leader.score.adjustedPrice)}<span class="unit"> /mo</span></div>
+        <div class="hero-delta" style="color:${heroColor}">${heroIcon}${heroText}</div>
+      </div>
+      ${statStrip}
+      <div class="section-label">Full leaderboard</div>
+      <div class="group-card">
+        ${ranked.map(({ apt }, i) => renderRankRow(apt, i + 1)).join("")}
+      </div>
+    </div>`;
+}
+
+function renderRankRow(apt, rank) {
+  const s = scoreApartment(apt, settings);
+  const delta = s.adjustedPrice - (Number(apt.baseRent) || 0);
+  const isExpanded = expandedId === apt.id;
+  const rankClass = rank === 1 ? "r1" : rank === 2 ? "r2" : rank === 3 ? "r3" : "";
+  const deltaColor = delta < 0 ? "var(--green)" : delta > 0 ? "var(--rose)" : "var(--text-faint)";
+  const deltaIcon = delta !== 0 ? icon(delta < 0 ? "arrowDown" : "arrowUp", 11) : "";
+  const deltaText = delta === 0 ? "at sticker" : `${money0(Math.abs(delta))} vs sticker`;
+  const isPendingDelete = pendingDeleteId === apt.id;
+
+  let breakdown = "";
+  if (isExpanded) {
+    breakdown = `
+      <div class="breakdown-wrap">
+        <div class="breakdown-box">
+          ${breakdownLine("Effective base rent", s.effBaseRent, true)}
+          ${s.monthlyFee > 0 ? breakdownLine("Monthly fee (utilities/amenities)", s.monthlyFee, true) : ""}
+          ${breakdownLine("Amortized move-in fees", s.amortizedFees, true)}
+          ${s.lateTotal > 0 ? breakdownLine("Late move-in charge", s.lateAmortized, true) : ""}
+          ${breakdownLine("Amenities tier", s.amenitiesAdj)}
+          ${breakdownLine("Privacy &amp; soundproofing", s.privacyAdj)}
+          ${breakdownLine("Lease break (expected cost)", s.leaseAdj)}
+          ${breakdownLine("Wow factor", s.wowAdj)}
+          ${s.sqftFactor !== 1 ? breakdownLine(`Size adjustment (&times;${s.sqftFactor.toFixed(2)})`, s.adjustedPrice - s.subtotal) : ""}
+          <div class="breakdown-total">
+            <span class="tlabel">Adjusted monthly price</span>
+            <span class="tvalue">${money0(s.adjustedPrice)}</span>
+          </div>
+        </div>
+        <div class="row-actions">
+          <button class="secondary-btn active-press-99" data-action="edit" data-id="${apt.id}">${icon("pencil", 14)} Edit</button>
+          <button class="secondary-btn active-press-99 ${isPendingDelete ? "danger-armed" : ""}" data-action="delete" data-id="${apt.id}">${icon(
+      "trash",
+      14
+    )} ${isPendingDelete ? "Tap to confirm" : "Delete"}</button>
+        </div>
+      </div>`;
+  }
+
+  return `
+    <div class="rank-row">
+      <button class="rank-row-header active-press-99" data-action="expand" data-id="${apt.id}">
+        <div class="rank-badge ${rankClass}">${rank}</div>
+        <div class="rank-row-info">
+          <div class="rank-row-name">${escapeHtml(apt.name) || "Untitled property"}</div>
+          <div class="rank-row-addr">${escapeHtml(apt.address) || "No address yet"}</div>
+        </div>
+        <div class="rank-row-price">
+          <div class="price">${money0(s.adjustedPrice)}</div>
+          <div class="delta" style="color:${deltaColor}">${deltaIcon}${deltaText}</div>
+        </div>
+        <span class="chevron ${isExpanded ? "open" : ""}">${icon("chevronDown", 16)}</span>
+      </button>
+      ${breakdown}
+    </div>`;
+}
+
+
+
+/* ---------------- Render: Form ---------------- */
+function fieldRowInput(label, field, opts) {
+  opts = opts || {};
+  const { suffix, type = "text", inputMode, placeholder, align = "right" } = opts;
+  const v = editingApt[field];
+  return `
+    <div class="field-row">
+      <div class="label">${label}</div>
+      <div class="value-wrap">
+        <input class="text-input ${align === "left" ? "left" : ""}" type="${type}" ${inputMode ? `inputmode="${inputMode}"` : ""}
+          data-field="${field}" placeholder="${placeholder || ""}" value="${escapeAttr(v)}" />
+        ${suffix ? `<span class="suffix">${suffix}</span>` : ""}
+      </div>
+    </div>`;
+}
+
+function renderSelectCard(options, field, valueForFn, idPrefix) {
+  return options
+    .map((opt, i) => {
+      const active = editingApt[field] === opt.label;
+      const badge = valueForFn ? valueForFn(opt) : null;
+      const badgeColor = badge > 0 ? "var(--rose)" : badge < 0 ? "var(--green)" : "var(--text-faint)";
+      const badgeId = idPrefix ? `id="${idPrefix}-${i}"` : "";
+      return `
+        <button class="select-card active-press-99 ${active ? "active" : ""}" data-action="select-option" data-field="${field}" data-value="${escapeAttr(
+        opt.label
+      )}">
+          <div class="radio">${active ? icon("check", 12) : ""}</div>
+          <div class="body">
+            <div class="opt-label">${opt.label}</div>
+            <div class="opt-desc">${opt.desc}</div>
+          </div>
+          ${
+            badge != null
+              ? `<div class="badge" ${badgeId} style="color:${badgeColor}">${badge > 0 ? "+" : ""}${money(badge)}<div class="per-mo">/mo</div></div>`
+              : ""
+          }
+        </button>`;
+    })
+    .join("");
+}
+
+function renderForm() {
+  const canSave = editingApt.name.trim().length > 0 && String(editingApt.baseRent).trim().length > 0;
+  return `
+    <div class="form-header">
+      <button data-action="cancel">${icon("x", 20, "color:var(--text-dim)")}</button>
+      <div class="form-title">${editingApt.name ? "Edit property" : "New property"}</div>
+      <button class="form-save-btn" data-action="save" ${canSave ? "" : "disabled"}>Save</button>
+    </div>
+    <div class="form-body">
+      <div class="section-label">Basics</div>
+      <div class="group-card">
+        ${fieldRowInput("Name", "name", { placeholder: "The Meridian, Unit 412", align: "left" })}
+        ${fieldRowInput("Address", "address", { placeholder: "123 Main St", align: "left" })}
+      </div>
+
+      <div class="section-label">Rent &amp; lease</div>
+      <div class="group-card">
+        ${fieldRowInput("Base monthly rent", "baseRent", { suffix: "/mo", type: "number", inputMode: "decimal", placeholder: "2,400" })}
+        ${fieldRowInput("Monthly fee (utilities, amenities)", "monthlyFee", { suffix: "/mo", type: "number", inputMode: "decimal", placeholder: "0" })}
+        ${fieldRowInput("Lease term", "leaseTerm", { suffix: "months", type: "number", inputMode: "numeric", placeholder: "12" })}
+        ${fieldRowInput("Lease start date", "leaseStart", { type: "date" })}
+        ${fieldRowInput("Weeks free (special)", "weeksFree", { type: "number", inputMode: "numeric", placeholder: "0" })}
+      </div>
+      <div class="form-caption">Weeks free only discounts base rent — the monthly fee is charged in full every month.</div>
+
+      <div class="section-label">Move-in fees</div>
+      <div class="group-card">
+        ${fieldRowInput("Security deposit", "deposit", { type: "number", inputMode: "decimal", placeholder: "0" })}
+        ${fieldRowInput("Admin / app fee", "adminFee", { type: "number", inputMode: "decimal", placeholder: "0" })}
+        ${fieldRowInput("Other move-in fee", "otherFee", { type: "number", inputMode: "decimal", placeholder: "0" })}
+      </div>
+
+      <div class="section-label">Unit size</div>
+      <div class="group-card">
+        ${fieldRowInput("Square footage", "sqft", { suffix: "sq ft", type: "number", inputMode: "numeric", placeholder: "800" })}
+      </div>
+      <div class="form-caption">Scales the final price: under ${settings.sqftLowThreshold} sq ft &times;${settings.sqftLowFactor}, ${
+    settings.sqftLowThreshold
+  }&ndash;${settings.sqftHighThreshold} &times;${settings.sqftMidFactor}, over ${settings.sqftHighThreshold} &times;${settings.sqftHighFactor}.</div>
+
+      <div class="section-label">Amenities tier</div>
+      ${renderSelectCard(AMENITY_TIERS, "amenityTier", amenityValueFor)}
+
+      <div class="section-label">Privacy &amp; soundproofing</div>
+      ${renderSelectCard(PRIVACY_OPTIONS, "privacyTier", privacyValueFor)}
+
+      <div class="section-label">Lease flexibility</div>
+      ${renderSelectCard(LEASE_OPTIONS, "leaseRating", leaseValueFor, "lease-badge")}
+
+      <div class="section-label">Wow factor</div>
+      ${renderSelectCard(WOW_OPTIONS, "wowTier", wowValueFor)}
+
+      <div class="section-label">Notes</div>
+      <div class="group-card">
+        <textarea data-field="notes" placeholder="Corner unit, city view, close to downtown…" rows="3"
+          style="width:100%;font-size:14.5px;color:var(--text);background:transparent;border:none;padding:14px;resize:none;">${escapeHtml(
+          editingApt.notes
+        )}</textarea>
+      </div>
+
+      <div style="margin-top:24px;">
+        <button class="primary-btn active-press" data-action="save" ${canSave ? "" : "disabled"}>Save property</button>
+      </div>
+    </div>`;
+}
+
+function refreshLeaseBadges() {
+  LEASE_OPTIONS.forEach((opt, i) => {
+    const el = document.getElementById(`lease-badge-${i}`);
+    if (!el) return;
+    const val = leaseValueFor(opt);
+    const color = val > 0 ? "var(--rose)" : val < 0 ? "var(--green)" : "var(--text-faint)";
+    el.style.color = color;
+    el.innerHTML = `${val > 0 ? "+" : ""}${money(val)}<div class="per-mo">/mo</div>`;
+  });
+}
+
+function refreshSaveButtons() {
+  if (!editingApt) return;
+  const canSave = editingApt.name.trim().length > 0 && String(editingApt.baseRent).trim().length > 0;
+  document.querySelectorAll('[data-action="save"]').forEach((btn) => {
+    btn.disabled = !canSave;
+  });
+}
+
+/* ---------------- Render: Settings ---------------- */
+function settingsRow(label, field, opts) {
+  opts = opts || {};
+  const { index, transform = "none", suffix = "", isDate = false } = opts;
+  if (isDate) {
+    return `<div class="field-row"><div class="label">${label}</div><div class="value-wrap">
+      <input type="date" class="settings-date" data-settings-field="${field}" value="${settings[field]}" /></div></div>`;
+  }
+  const raw = index != null ? settings[field][index] : settings[field];
+  const displayVal = transform === "pct" ? Number((raw * 100).toFixed(3)) : raw;
+  const idxAttr = index != null ? `data-settings-index="${index}"` : "";
+  return `<div class="field-row"><div class="label">${label}</div><div class="value-wrap">
+    <input type="number" inputmode="decimal" class="settings-number" data-settings-field="${field}" ${idxAttr} data-settings-transform="${transform}" value="${displayVal}" />
+    <span class="suffix">${suffix}</span></div></div>`;
+}
+
+function renderSettings() {
+  return `
+    <div style="padding:18px 16px 40px;">
+      <div class="page-title">Tune scoring</div>
+      <div class="page-sub">Every property recalculates instantly.</div>
+
+      <div class="section-label">Amenities tier adjustment</div>
+      <div class="group-card">${AMENITY_TIERS.map((t, i) => settingsRow(t.label, "amenityDollars", { index: i, suffix: "$/mo" })).join("")}</div>
+
+      <div class="section-label">Privacy &amp; soundproofing adjustment</div>
+      <div class="group-card">${PRIVACY_OPTIONS.map((t, i) => settingsRow(t.label, "privacyDollars", { index: i, suffix: "$/mo" })).join("")}</div>
+
+      <div class="section-label">Late move-in charge</div>
+      <div class="group-card">
+        ${settingsRow("Threshold date", "lateThreshold", { isDate: true })}
+        ${settingsRow("Charge rate", "lateRate", { suffix: "$/mo" })}
+        ${settingsRow("Proration convention", "lateProrationDays", { suffix: "days/mo" })}
+      </div>
+
+      <div class="section-label">Lease break — expected cost</div>
+      <div class="group-card">
+        ${settingsRow("Chance you actually break early", "breakProbability", { transform: "pct", suffix: "%" })}
+        ${LEASE_OPTIONS.map((o, i) => settingsRow(o.label + " — severity", "leaseSeverityPct", { index: i, transform: "pct", suffix: "%" })).join("")}
+      </div>
+      <div class="form-caption">Each rating's severity is a % of rent (a factor, not a fixed amount) representing the full cost if you broke the lease. Multiplied by the probability above, it's always a small added cost — pricier units carry a bigger one, better terms carry a smaller one.</div>
+
+      <div class="section-label">Wow-factor adjustment</div>
+      <div class="group-card">${WOW_OPTIONS.map((o, i) => settingsRow(o.label, "wowDollars", { index: i, suffix: "$/mo" })).join("")}</div>
+
+      <div class="section-label">Size adjustment</div>
+      <div class="group-card">
+        ${settingsRow("Small under", "sqftLowThreshold", { suffix: "sq ft" })}
+        ${settingsRow("Small factor", "sqftLowFactor", { suffix: "&times;" })}
+        ${settingsRow("Large over", "sqftHighThreshold", { suffix: "sq ft" })}
+        ${settingsRow("Mid factor", "sqftMidFactor", { suffix: "&times;" })}
+        ${settingsRow("Large factor", "sqftHighFactor", { suffix: "&times;" })}
+      </div>
+      <div class="form-caption">Multiplies the entire adjusted price — smaller units cost more per square foot, larger units cost less.</div>
+
+      <div class="section-label">Your data</div>
+      <div class="io-row">
+        <button class="io-btn active-press-99" data-action="export">${icon("download", 15)} Export backup</button>
+        <button class="io-btn active-press-99" data-action="import">${icon("upload", 15)} Import backup</button>
+      </div>
+      <div id="io-status">${ioStatusMsg}</div>
+
+      <div style="margin-top:22px;">
+        <button class="reset-btn ${pendingReset ? "armed" : ""}" data-action="reset">${pendingReset ? "Tap again to erase all properties" : "Reset all data"}</button>
+      </div>
+    </div>`;
+}
+
+/* ---------------- Main render dispatcher ---------------- */
+function render() {
+  const content = document.getElementById("app-content");
+  const tabBarWrap = document.getElementById("tab-bar-wrap");
+  if (tab === "rankings") content.innerHTML = renderRankings();
+  else if (tab === "form") content.innerHTML = renderForm();
+  else if (tab === "settings") content.innerHTML = renderSettings();
+  tabBarWrap.innerHTML = renderTabBar();
+}
+
+/* ---------------- Export / Import ---------------- */
+function doExport() {
+  const payload = { apartments, settings, exportedAt: new Date().toISOString(), version: 1 };
+  const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = `apartment-scorecard-backup-${new Date().toISOString().slice(0, 10)}.json`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  ioStatusMsg = "Backup downloaded.";
+  render();
+  setTimeout(() => {
+    ioStatusMsg = "";
+    render();
+  }, 3000);
+}
+
+function handleImportFile(file) {
+  const reader = new FileReader();
+  reader.onload = () => {
+    try {
+      const data = JSON.parse(reader.result);
+      if (Array.isArray(data.apartments)) {
+        apartments = data.apartments;
+        saveApartments();
+      }
+      if (data.settings && typeof data.settings === "object") {
+        settings = { ...DEFAULT_SETTINGS, ...data.settings };
+        saveSettings();
+      }
+      ioStatusMsg = "Backup restored.";
+    } catch (e) {
+      ioStatusMsg = "That file could not be read.";
+    }
+    render();
+    setTimeout(() => {
+      ioStatusMsg = "";
+      render();
+    }, 3000);
+  };
+  reader.readAsText(file);
+}
+
+/* ---------------- Event delegation ---------------- */
+function scrollTop0() {
+  const c = document.getElementById("app-content");
+  if (c) c.scrollTop = 0;
+}
+
+function handleClick(e) {
+  const btn = e.target.closest("[data-action]");
+  if (!btn) return;
+  const action = btn.dataset.action;
+
+  if (action === "tab") {
+    const newTab = btn.dataset.tab;
+    if (newTab === "form") editingApt = emptyApartment();
+    tab = newTab;
+    scrollTop0();
+    render();
+  } else if (action === "add") {
+    editingApt = emptyApartment();
+    tab = "form";
+    scrollTop0();
+    render();
+  } else if (action === "edit") {
+    const found = apartments.find((a) => a.id === btn.dataset.id);
+    if (found) {
+      editingApt = JSON.parse(JSON.stringify(found));
+      tab = "form";
+      scrollTop0();
+      render();
+    }
+  } else if (action === "cancel") {
+    editingApt = null;
+    tab = "rankings";
+    scrollTop0();
+    render();
+  } else if (action === "save") {
+    if (!editingApt) return;
+    const canSave = editingApt.name.trim().length > 0 && String(editingApt.baseRent).trim().length > 0;
+    if (!canSave) return;
+    const idx = apartments.findIndex((a) => a.id === editingApt.id);
+    if (idx >= 0) apartments[idx] = editingApt;
+    else apartments.push(editingApt);
+    saveApartments();
+    editingApt = null;
+    tab = "rankings";
+    scrollTop0();
+    render();
+  } else if (action === "expand") {
+    expandedId = expandedId === btn.dataset.id ? null : btn.dataset.id;
+    render();
+  } else if (action === "delete") {
+    const id = btn.dataset.id;
+    if (pendingDeleteId === id) {
+      apartments = apartments.filter((a) => a.id !== id);
+      saveApartments();
+      pendingDeleteId = null;
+      expandedId = null;
+      render();
+    } else {
+      pendingDeleteId = id;
+      render();
+      setTimeout(() => {
+        if (pendingDeleteId === id) {
+          pendingDeleteId = null;
+          render();
+        }
+      }, 2500);
+    }
+  } else if (action === "select-option") {
+    if (!editingApt) return;
+    const field = btn.dataset.field;
+    const value = btn.dataset.value;
+    editingApt[field] = editingApt[field] === value ? null : value;
+    render();
+  } else if (action === "reset") {
+    if (pendingReset) {
+      apartments = [];
+      saveApartments();
+      pendingReset = false;
+      render();
+    } else {
+      pendingReset = true;
+      render();
+      setTimeout(() => {
+        if (pendingReset) {
+          pendingReset = false;
+          render();
+        }
+      }, 2500);
+    }
+  } else if (action === "export") {
+    doExport();
+  } else if (action === "import") {
+    document.getElementById("import-file-input").click();
+  }
+}
+
+function handleInput(e) {
+  const el = e.target;
+  if (!el.dataset) return;
+  if (el.dataset.field !== undefined && editingApt) {
+    const field = el.dataset.field;
+    editingApt[field] = el.value;
+    if (["baseRent", "leaseTerm", "weeksFree", "monthlyFee"].includes(field)) {
+      refreshLeaseBadges();
+    }
+    if (field === "name" || field === "baseRent") {
+      refreshSaveButtons();
+    }
+    return;
+  }
+  if (el.dataset.settingsField !== undefined) {
+    const field = el.dataset.settingsField;
+    if (field === "lateThreshold") {
+      settings.lateThreshold = el.value;
+    } else {
+      let num = Number(el.value);
+      if (el.dataset.settingsTransform === "pct") num = num / 100;
+      const index = el.dataset.settingsIndex;
+      if (index !== undefined) {
+        const arr = settings[field].slice();
+        arr[Number(index)] = num;
+        settings[field] = arr;
+      } else {
+        settings[field] = num;
+      }
+    }
+    saveSettings();
+  }
+}
+
+/* ---------------- Init ---------------- */
+function init() {
+  loadState();
+  render();
+  const root = document.getElementById("app-root");
+  root.addEventListener("click", handleClick);
+  root.addEventListener("input", handleInput);
+  const importInput = document.getElementById("import-file-input");
+  importInput.addEventListener("change", (e) => {
+    const file = e.target.files[0];
+    if (file) handleImportFile(file);
+    importInput.value = "";
+  });
+}
+
+document.addEventListener("DOMContentLoaded", init);
+
+</script>
+</body>
+</html>
